@@ -1,0 +1,193 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 10px solid #800080;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
+#previous-players {
+    padding: 5px;
+    width: 70%;
+}
+
+.name-header {
+    width: 50%;
+}
+
+.name-header select {
+    width: 100%;
+    padding: 5px;
+}
+
+.name-column {
+    width: 50%;
+}
+
+.game-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-box {
+    background-color: #d3d3d3;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1.2em;
+}
+
+.info-box.green {
+    background-color: #32cd32;
+    display: flex;
+    align-items: center;
+}
+
+.info-box input {
+    border: none;
+    background: none;
+    font-size: 1.2em;
+    width: 50px;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+thead th {
+    background-color: #0000ff;
+    color: #fff;
+    padding: 10px;
+    position: relative;
+    vertical-align: middle;
+}
+
+tbody td {
+    border: 1px solid #000;
+    padding: 10px;
+    text-align: center;
+}
+
+.results {
+    font-weight: bold;
+    color: black;
+}
+
+.history {
+    color: #d3d3d3;
+}
+
+button {
+    background-color: #008cba;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    margin: 2px 5px;
+}
+
+button:hover {
+    background-color: #005f5f;
+}
+
+.control-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.remove-button {
+    background-color: #ff4c4c;
+}
+
+.remove-button:hover {
+    background-color: #ff0000;
+}
+
+/* Dropdown styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: auto;
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content button {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.dropdown-content button:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* New styles for the add player button */
+.add-player {
+    position: middle;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-player:hover {
+    background-color: #45a049;
+}
