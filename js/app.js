@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM fully loaded and parsed');
     let players = JSON.parse(localStorage.getItem('players')) || [];
+    let totalResults = JSON.parse(localStorage.getItem('totalResults')) || 0;
     const previousPlayers = JSON.parse(localStorage.getItem('previousPlayers')) || [];
     let gamesPlayed = JSON.parse(localStorage.getItem('gamesPlayed')) || 0;
     const restartGameButton = document.getElementById('restart-game');
@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const playersCountDisplay = document.getElementById('players-count');
     const previousPlayersDropdown = document.getElementById('previous-players');
     const dropdownContent = document.getElementById('dropdown-content');
-    const addPlayerButton = document.getElementById('add-player');
+    const addPlayerButton = document.getElementById('add-player'); // New button
 
+    // Function to render players in the dropdown
     function renderPreviousPlayers() {
-        console.log('Rendering previous players');
         previousPlayers.sort();
         previousPlayersDropdown.innerHTML = '<option value="add" disabled selected>Add</option><option value="add-new">Add New Player</option>';
         previousPlayers.forEach(playerName => {
@@ -25,34 +25,34 @@ document.addEventListener('DOMContentLoaded', () => {
         renderDropdownOptions();
     }
 
+    // Function to render options in the manage players dropdown
     function renderDropdownOptions() {
-        console.log('Rendering dropdown options');
         dropdownContent.innerHTML = '';
         previousPlayers.forEach(playerName => {
             const button = document.createElement('button');
             button.textContent = `Delete ${playerName}`;
-            button.addEventListener('click', () => deletePlayer(playerName));
+            button.onclick = () => deletePlayer(playerName);
             dropdownContent.appendChild(button);
         });
     }
 
+    // Function to render players in the table
     function renderPlayers() {
-        console.log('Rendering players');
         playersContainer.innerHTML = '';
         players.forEach((player, index) => {
             const playerRow = document.createElement('tr');
             playerRow.innerHTML = `
                 <td class="control-buttons controls">
-                    <button data-action="win" data-multiplier="1">+1</button>
-                    <button data-action="win" data-multiplier="2">+2</button>
-                    <button data-action="win" data-multiplier="4">+4</button>
-                    <button data-action="lose" data-multiplier="1">-1</button>
+                    <button onclick="updatePlayer(${index}, 'win', 1)">+1</button>
+                    <button onclick="updatePlayer(${index}, 'win', 2)">+2</button>
+                    <button onclick="updatePlayer(${index}, 'win', 4)">+4</button>
+                    <button onclick="updatePlayer(${index}, 'lose', 1)">-1</button>
                 </td>
                 <td class="name-column">${player.name}</td>
                 <td>${player.wins}</td>
                 <td class="results">$${player.result.toFixed(2)}</td>
                 <td class="history">$${player.history.toFixed(2)}</td>
-                <td><button class="remove-button" data-index="${index}">Remove</button></td>
+                <td><button class="remove-button" onclick="removePlayer(${index})">Remove</button></td>
             `;
             playersContainer.appendChild(playerRow);
         });
@@ -60,13 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
         renderGamesPlayed();
     }
 
+    // Function to render the number of games played
     function renderGamesPlayed() {
-        console.log('Rendering games played');
         gamesPlayedDisplay.textContent = gamesPlayed;
     }
 
-    function updatePlayer(index, action, multiplier = 1) {
-        console.log(`Updating player ${index}, action: ${action}, multiplier: ${multiplier}`);
+    // Function to update player data
+    window.updatePlayer = (index, action, multiplier = 1) => {
         const handValue = parseFloat(handValueInput.value) || 50;
         const adjustedHandValue = handValue * multiplier;
         if (action === 'win') {
@@ -88,10 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('gamesPlayed', JSON.stringify(gamesPlayed));
         renderPlayers();
         renderGamesPlayed();
-    }
+    };
 
-    function removePlayer(index) {
-        console.log(`Removing player at index ${index}`);
+    // Function to remove a player
+    window.removePlayer = (index) => {
         const playerName = players[index].name;
         const history = JSON.parse(localStorage.getItem('history')) || {};
         history[playerName] = (history[playerName] || 0) + players[index].result;
@@ -100,10 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('players', JSON.stringify(players));
         renderPlayers();
         renderGamesPlayed();
-    }
+    };
 
+    // Function to delete a player from previous players list
     function deletePlayer(playerName) {
-        console.log(`Deleting player ${playerName}`);
         const index = previousPlayers.indexOf(playerName);
         if (index !== -1) {
             previousPlayers.splice(index, 1);
@@ -112,8 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Event listener for selecting a player from the dropdown
     previousPlayersDropdown.addEventListener('change', () => {
-        console.log('Previous Players Dropdown changed');
         const selectedPlayer = previousPlayersDropdown.value;
         if (selectedPlayer === "add-new") {
             const playerName = prompt("Enter player name:").trim();
@@ -140,8 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
         previousPlayersDropdown.value = "add"; // Reset the dropdown to "Add" after selecting a player
     });
 
+    // Event listener for restarting the game
     restartGameButton.addEventListener('click', () => {
-        console.log('Restart Game button clicked');
         const history = JSON.parse(localStorage.getItem('history')) || {};
         players.forEach(player => {
             history[player.name] = (history[player.name] || 0) + player.result;
@@ -158,37 +158,21 @@ document.addEventListener('DOMContentLoaded', () => {
         renderPreviousPlayers();
     });
 
+    // Event listener for adding a new player
     addPlayerButton.addEventListener('click', () => {
-        console.log('Add Player button clicked');
-        const playerName = prompt("Enter player name:");
-        if (playerName && playerName.trim() !== '' && !players.some(player => player.name === playerName.trim())) {
-            const player = { name: playerName.trim(), wins: 0, result: 0, history: 0 };
+        const playerName = prompt("Enter player name:").trim();
+        if (playerName && !previousPlayers.includes(playerName)) {
+            const player = { name: playerName, wins: 0, result: 0, history: 0 };
             players.push(player);
-            if (!previousPlayers.includes(playerName.trim())) {
-                previousPlayers.push(playerName.trim());
-                localStorage.setItem('previousPlayers', JSON.stringify(previousPlayers));
-            }
+            previousPlayers.push(playerName);
+            localStorage.setItem('previousPlayers', JSON.stringify(previousPlayers));
             localStorage.setItem('players', JSON.stringify(players));
             renderPlayers();
             renderPreviousPlayers();
         }
     });
 
-    playersContainer.addEventListener('click', (event) => {
-        if (event.target.tagName === 'BUTTON') {
-            console.log('Player container button clicked');
-            const index = event.target.getAttribute('data-index');
-            const action = event.target.getAttribute('data-action');
-            const multiplier = parseInt(event.target.getAttribute('data-multiplier'), 10);
-            if (index !== null) {
-                removePlayer(index);
-            } else if (action && !isNaN(multiplier)) {
-                const playerIndex = Array.from(playersContainer.children).indexOf(event.target.closest('tr'));
-                updatePlayer(playerIndex, action, multiplier);
-            }
-        }
-    });
-
+    // Initial render
     renderPlayers();
     renderGamesPlayed();
     renderPreviousPlayers();
