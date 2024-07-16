@@ -105,16 +105,24 @@ button {
     border: none;
     padding: 5px;
     cursor: pointer;
-    margin: 2px 5px;
+    margin: 1px 5px;
 }
 
 button:hover {
     background-color: #005f5f;
 }
 
+/* Adjust button size and spacing for control buttons */
+.control-buttons button {
+    font-size: 1.3em; /* Increase font size by 30% */
+    padding: 6px 10px; /* Adjust padding to make buttons larger */
+    margin: 2px; /* Reduce margin to keep buttons side by side */
+}
+
 .control-buttons {
     display: flex;
     justify-content: center;
+    gap: 2px; /* Ensure buttons stay side by side */
 }
 
 .remove-button {
@@ -191,3 +199,4 @@ button:hover {
 .add-player:hover {
     background-color: #45a049;
 }
+
