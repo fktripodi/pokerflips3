@@ -149,12 +149,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     addPlayerButton.addEventListener('click', () => {
-        const playerName = prompt("Enter player name:").trim();
-        if (playerName && !previousPlayers.includes(playerName)) {
-            const player = { name: playerName, wins: 0, result: 0, history: 0 };
+        const playerName = prompt("Enter player name:");
+        if (playerName && playerName.trim() !== '' && !players.some(player => player.name === playerName.trim())) {
+            const player = { name: playerName.trim(), wins: 0, result: 0, history: 0 };
             players.push(player);
-            previousPlayers.push(playerName);
-            localStorage.setItem('previousPlayers', JSON.stringify(previousPlayers));
+            if (!previousPlayers.includes(playerName.trim())) {
+                previousPlayers.push(playerName.trim());
+                localStorage.setItem('previousPlayers', JSON.stringify(previousPlayers));
+            }
             localStorage.setItem('players', JSON.stringify(players));
             renderPlayers();
             renderPreviousPlayers();
@@ -168,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const multiplier = parseInt(event.target.getAttribute('data-multiplier'), 10);
             if (index !== null) {
                 removePlayer(index);
-            } else if (action && multiplier) {
+            } else if (action && !isNaN(multiplier)) {
                 const playerIndex = Array.from(playersContainer.children).indexOf(event.target.closest('tr'));
                 updatePlayer(playerIndex, action, multiplier);
             }
