@@ -91,7 +91,7 @@ thead th.small-column {
 
 tbody td {
     border: 1px solid #000;
-    padding: 10px;/ft buttons was 10, 0 better
+    padding: 10px;/*ft buttons was 10, 0 better*/
     text-align: center;
     font-size: 1.2em; /*ft -1 button & $ Smaller font for mobile */
 }
