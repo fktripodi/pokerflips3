@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </td>
                 <td class="name-column">${player.name}</td>
                 <td>${player.wins}</td>
-                <td class="results">$${player.result.toFixed(2).replace('.00', '')}</td>
+                <td class="results">$${player.result.toFixed(2)}</td>
                 <td><button class="remove-button" onclick="removePlayer(${index})">R</button></td>
             `;
             playersContainer.appendChild(playerRow);
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const playerRow = document.createElement('tr');
                 playerRow.innerHTML = `
                     <td>${playerName}</td>
-                    <td>$${history[playerName].toFixed(2).replace('.00', '')}</td>
+                    <td>$${history[playerName].toFixed(2)}</td>
                     <td><button onclick="removePlayerHistory('${playerName}')">Clear History</button></td>
                 `;
                 pastPlayersContainer.appendChild(playerRow);
