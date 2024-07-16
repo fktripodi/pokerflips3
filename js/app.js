@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     let players = JSON.parse(localStorage.getItem('players')) || [];
-    let totalResults = JSON.parse(localStorage.getItem('totalResults')) || 0;
     const previousPlayers = JSON.parse(localStorage.getItem('previousPlayers')) || [];
     let gamesPlayed = JSON.parse(localStorage.getItem('gamesPlayed')) || 0;
     const restartGameButton = document.getElementById('restart-game');
@@ -10,22 +9,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const playersCountDisplay = document.getElementById('players-count');
     const previousPlayersDropdown = document.getElementById('previous-players');
     const dropdownContent = document.getElementById('dropdown-content');
-    const addPlayerButton = document.getElementById('add-player'); // New button
+    const pastPlayersContainer = document.getElementById('past-players');
 
-    // Function to render players in the dropdown
     function renderPreviousPlayers() {
         previousPlayers.sort();
+        const currentPlayersNames = players.map(player => player.name);
         previousPlayersDropdown.innerHTML = '<option value="add" disabled selected>Add</option><option value="add-new">Add New Player</option>';
         previousPlayers.forEach(playerName => {
-            const option = document.createElement('option');
-            option.value = playerName;
-            option.textContent = playerName;
-            previousPlayersDropdown.appendChild(option);
+            if (!currentPlayersNames.includes(playerName)) {
+                const option = document.createElement('option');
+                option.value = playerName;
+                option.textContent = playerName;
+                previousPlayersDropdown.appendChild(option);
+            }
         });
         renderDropdownOptions();
     }
 
-    // Function to render options in the manage players dropdown
     function renderDropdownOptions() {
         dropdownContent.innerHTML = '';
         previousPlayers.forEach(playerName => {
@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Function to render players in the table
     function renderPlayers() {
         playersContainer.innerHTML = '';
         players.forEach((player, index) => {
@@ -51,36 +50,42 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td class="name-column">${player.name}</td>
                 <td>${player.wins}</td>
                 <td class="results">$${player.result.toFixed(2)}</td>
-                <td class="history">$${player.history.toFixed(2)}</td>
-                <td><button class="remove-button" onclick="removePlayer(${index})">Remove</button></td>
+                <td><button class="remove-button" onclick="removePlayer(${index})">R</button></td>
             `;
             playersContainer.appendChild(playerRow);
         });
         playersCountDisplay.textContent = players.length;
         renderGamesPlayed();
+        renderPreviousPlayers(); // Re-render dropdown options to reflect current players
     }
 
-    // Function to render the number of games played
     function renderGamesPlayed() {
         gamesPlayedDisplay.textContent = gamesPlayed;
     }
 
-    // Function to update player data
     window.updatePlayer = (index, action, multiplier = 1) => {
         const handValue = parseFloat(handValueInput.value) || 50;
         const adjustedHandValue = handValue * multiplier;
         if (action === 'win') {
             players[index].wins += multiplier;
             players[index].result += adjustedHandValue * (players.length - 1);
+            players[index].history += adjustedHandValue * (players.length - 1); // Update history
             players.forEach((player, idx) => {
-                if (idx !== index) player.result -= adjustedHandValue;
+                if (idx !== index) {
+                    player.result -= adjustedHandValue;
+                    player.history -= adjustedHandValue; // Update history
+                }
             });
             gamesPlayed += multiplier;
         } else if (action === 'lose') {
             players[index].wins -= multiplier;
             players[index].result -= adjustedHandValue * (players.length - 1);
+            players[index].history -= adjustedHandValue * (players.length - 1); // Update history
             players.forEach((player, idx) => {
-                if (idx !== index) player.result += adjustedHandValue;
+                if (idx !== index) {
+                    player.result += adjustedHandValue;
+                    player.history += adjustedHandValue; // Update history
+                }
             });
             gamesPlayed -= 1;
         }
@@ -88,9 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('gamesPlayed', JSON.stringify(gamesPlayed));
         renderPlayers();
         renderGamesPlayed();
+        renderPastPlayers(); // Update past players list in real-time
     };
 
-    // Function to remove a player
     window.removePlayer = (index) => {
         const playerName = players[index].name;
         const history = JSON.parse(localStorage.getItem('history')) || {};
@@ -100,9 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('players', JSON.stringify(players));
         renderPlayers();
         renderGamesPlayed();
+        renderPastPlayers(); // Update past players list after removal
     };
 
-    // Function to delete a player from previous players list
     function deletePlayer(playerName) {
         const index = previousPlayers.indexOf(playerName);
         if (index !== -1) {
@@ -112,7 +117,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Event listener for selecting a player from the dropdown
+    function renderPastPlayers() {
+        const history = JSON.parse(localStorage.getItem('history')) || {};
+        pastPlayersContainer.innerHTML = '';
+        Object.keys(history).forEach(playerName => {
+            if (history[playerName] !== 0) {
+                const playerRow = document.createElement('tr');
+                playerRow.innerHTML = `
+                    <td>${playerName}</td>
+                    <td>$${history[playerName].toFixed(2)}</td>
+                    <td><button onclick="removePlayerHistory('${playerName}')">Clear History</button></td>
+                `;
+                pastPlayersContainer.appendChild(playerRow);
+            }
+        });
+    }
+
+    window.removePlayerHistory = (playerName) => {
+        const history = JSON.parse(localStorage.getItem('history')) || {};
+        if (history[playerName]) {
+            delete history[playerName];
+            localStorage.setItem('history', JSON.stringify(history));
+            renderPastPlayers(); // Re-render the past players list
+        }
+    }
+
     previousPlayersDropdown.addEventListener('change', () => {
         const selectedPlayer = previousPlayersDropdown.value;
         if (selectedPlayer === "add-new") {
@@ -140,7 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
         previousPlayersDropdown.value = "add"; // Reset the dropdown to "Add" after selecting a player
     });
 
-    // Event listener for restarting the game
     restartGameButton.addEventListener('click', () => {
         const history = JSON.parse(localStorage.getItem('history')) || {};
         players.forEach(player => {
@@ -156,24 +184,11 @@ document.addEventListener('DOMContentLoaded', () => {
         renderPlayers();
         renderGamesPlayed();
         renderPreviousPlayers();
+        renderPastPlayers(); // Update past players list after restarting the game
     });
 
-    // Event listener for adding a new player
-    addPlayerButton.addEventListener('click', () => {
-        const playerName = prompt("Enter player name:").trim();
-        if (playerName && !previousPlayers.includes(playerName)) {
-            const player = { name: playerName, wins: 0, result: 0, history: 0 };
-            players.push(player);
-            previousPlayers.push(playerName);
-            localStorage.setItem('previousPlayers', JSON.stringify(previousPlayers));
-            localStorage.setItem('players', JSON.stringify(players));
-            renderPlayers();
-            renderPreviousPlayers();
-        }
-    });
-
-    // Initial render
     renderPlayers();
     renderGamesPlayed();
     renderPreviousPlayers();
+    renderPastPlayers(); // Initial render of past players
 });
