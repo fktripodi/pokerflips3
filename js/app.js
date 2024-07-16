@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const handValueInput = document.getElementById('hand-value');
     const playersContainer = document.getElementById('players');
     const gamesPlayedDisplay = document.getElementById('games-played');
-    const playersCountDisplay = document.getElementById('players-count');
     const previousPlayersDropdown = document.getElementById('previous-players');
     const dropdownContent = document.getElementById('dropdown-content');
     const pastPlayersContainer = document.getElementById('past-players');
@@ -41,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         players.forEach((player, index) => {
             const playerRow = document.createElement('tr');
             playerRow.innerHTML = `
-                <td class="control-buttons controls">
+                <td class="control-buttons controls small-column">
                     <button onclick="updatePlayer(${index}, 'win', 1)">+1</button>
                     <button onclick="updatePlayer(${index}, 'win', 2)">+2</button>
                     <button onclick="updatePlayer(${index}, 'win', 4)">+4</button>
@@ -49,12 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 </td>
                 <td class="name-column">${player.name}</td>
                 <td>${player.wins}</td>
-                <td class="results">$${player.result.toFixed(2)}</td>
+                <td class="results">$${player.result.toFixed(2).replace(/\.00$/, '')}</td>
                 <td><button class="remove-button" onclick="removePlayer(${index})">R</button></td>
             `;
             playersContainer.appendChild(playerRow);
         });
-        playersCountDisplay.textContent = players.length;
         renderGamesPlayed();
         renderPreviousPlayers(); // Re-render dropdown options to reflect current players
     }
@@ -125,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const playerRow = document.createElement('tr');
                 playerRow.innerHTML = `
                     <td>${playerName}</td>
-                    <td>$${history[playerName].toFixed(2)}</td>
+                    <td>$${history[playerName].toFixed(2).replace(/\.00$/, '')}</td>
                     <td><button onclick="removePlayerHistory('${playerName}')">Clear History</button></td>
                 `;
                 pastPlayersContainer.appendChild(playerRow);
