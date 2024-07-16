@@ -174,20 +174,27 @@ button:hover {
     display: block;
 }
 
-/* New styles for the add player button */
-.add-player {
-    position: middle;
-    bottom: 20px;
-    right: 20px;
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+/* Add styles for the past players section */
+.past-players-section {
+    margin-top: 20px;
+    text-align: left;
 }
 
-.add-player:hover {
-    background-color: #45a049;
+.past-players-section h2 {
+    background-color: #800080;
+    color: #fff;
+    padding: 10px;
+    margin: 0;
+}
+
+.past-players-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.past-players-section th, .past-players-section td {
+    border: 1px solid #000;
+    padding: 10px;
+    text-align: left;
 }
