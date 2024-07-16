@@ -14,7 +14,7 @@ body {
     padding: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border: 10px solid #800080;
-    position: relative;
+    position: relative; /* Added for positioning */
 }
 
 .header {
@@ -27,20 +27,20 @@ body {
 
 #previous-players {
     padding: 5px;
-    width: 70%;
+    width: 70%; /* Reduce the width of the dropdown by 50% */
 }
 
 .name-header {
-    width: 50%;
+    width: 50%; /* Ensure the name column has the same width as the dropdown */
 }
 
 .name-header select {
-    width: 100%;
+    width: 100%; /* Ensure the dropdown takes the full width of the cell */
     padding: 5px;
 }
 
 .name-column {
-    width: 50%;
+    width: 50%; /* Reduce the width of the name column by 50% */
 }
 
 .game-info {
@@ -96,7 +96,7 @@ tbody td {
 }
 
 .history {
-    color: #d3d3d3;
+    color: #d3d3d3; /* Very light grey color for history */
 }
 
 button {
@@ -105,24 +105,16 @@ button {
     border: none;
     padding: 5px;
     cursor: pointer;
-    margin: 1px 5px;
+    margin: 2px 5px; /* Add margin for spacing between buttons */
 }
 
 button:hover {
     background-color: #005f5f;
 }
 
-/* Adjust button size and spacing for control buttons */
-.control-buttons button {
-    font-size: 1.3em; /* Increase font size by 30% */
-    padding: 6px 10px; /* Adjust padding to make buttons larger */
-    margin: 2px; /* Reduce margin to keep buttons side by side */
-}
-
 .control-buttons {
     display: flex;
     justify-content: center;
-    gap: 2px; /* Ensure buttons stay side by side */
 }
 
 .remove-button {
@@ -199,4 +191,3 @@ button:hover {
 .add-player:hover {
     background-color: #45a049;
 }
-
