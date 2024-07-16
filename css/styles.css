@@ -13,7 +13,7 @@ body {
     background: #fff;
     padding: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border: 0px solid #800080;/ft purple border
+    border: 0px solid #800080;/*FT purple border/*
     position: relative; /* Added for positioning */
 }
 
@@ -53,7 +53,7 @@ body {
     background-color: #d3d3d3;
     padding: 10px;
     border-radius: 5px;
-    font-size: 1em;
+    font-size: 1em;/*ft font size top buttons*/
 }
 
 .info-box.green {
@@ -65,7 +65,7 @@ body {
 .info-box input {
     border: none;
     background: none;
-    font-size: 1em;
+    font-size: 1.5em;/*ft $ amount font size */
     width: 50px;
     text-align: center;
 }
@@ -82,7 +82,7 @@ thead th {
     padding: 10px;
     position: relative;
     vertical-align: middle;
-    font-size: 0.9em; /* Smaller font for mobile */
+    font-size: .9em; /*ft fontsize blue header Smaller font for mobile */
 }
 
 thead th.small-column {
@@ -91,9 +91,9 @@ thead th.small-column {
 
 tbody td {
     border: 1px solid #000;
-    padding: 0px; //ft buttons was 10, 0 better
+    padding: 10px;/ft buttons was 10, 0 better
     text-align: center;
-    font-size: 0.9em; /* Smaller font for mobile */
+    font-size: 1.2em; /*ft -1 button & $ Smaller font for mobile */
 }
 
 .results {
@@ -106,7 +106,7 @@ tbody td {
 }
 
 button {
-    background-color: #008cba;
+    background-color: #009cba;
     color: white;
     border: none;
     padding: 5px;
