@@ -53,7 +53,7 @@ body {
     background-color: #d3d3d3;
     padding: 10px;
     border-radius: 5px;
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 .info-box.green {
@@ -65,7 +65,7 @@ body {
 .info-box input {
     border: none;
     background: none;
-    font-size: 1.2em;
+    font-size: 1em;
     width: 50px;
     text-align: center;
 }
@@ -82,12 +82,18 @@ thead th {
     padding: 10px;
     position: relative;
     vertical-align: middle;
+    font-size: 0.9em; /* Smaller font for mobile */
+}
+
+thead th.small-column {
+    width: 10%; /* Reduce the width of the first column */
 }
 
 tbody td {
     border: 1px solid #000;
     padding: 10px;
     text-align: center;
+    font-size: 0.9em; /* Smaller font for mobile */
 }
 
 .results {
@@ -96,7 +102,7 @@ tbody td {
 }
 
 .history {
-    color: #d3d3d3; /* Very light grey color for history */
+    color: #d3d3d3;
 }
 
 button {
@@ -105,7 +111,8 @@ button {
     border: none;
     padding: 5px;
     cursor: pointer;
-    margin: 2px 5px; /* Add margin for spacing between buttons */
+    margin: 2px 5px;
+    font-size: 0.8em; /* Smaller font for mobile */
 }
 
 button:hover {
@@ -125,7 +132,6 @@ button:hover {
     background-color: #ff0000;
 }
 
-/* Dropdown styles */
 .dropdown {
     position: relative;
     display: inline-block;
