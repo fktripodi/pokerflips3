@@ -182,7 +182,7 @@ button:hover {
 
 /* Add styles for the past players section */
 .past-players-section {
-    margin-top: 550px;
+    margin-top: 550px;/*FT space between players history */
     text-align: left;
 }
 
