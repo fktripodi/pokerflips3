@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +17,7 @@
                 <div class="info-box">Players: <span id="players-count">0</span></div>
             </div>
             <div class="dropdown">
-                <button class="dropbtn">Delete Players</button>
+                <button class="dropbtn">DP</button>
                 <div class="dropdown-content" id="dropdown-content">
                     <!-- Options to delete players will be added here dynamically -->
                 </div>
@@ -36,16 +36,30 @@
                     </th>
                     <th>w</th>
                     <th>Results</th>
-                    <th>History</th>
-                    <th>Actions</th>
+                    <th>R</th>
                 </tr>
             </thead>
             <tbody id="players">
                 <!-- Players will be added here -->
             </tbody>
         </table>
+        <!-- New section for displaying past players -->
+        <div class="past-players-section">
+            <h2>Past Players</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Player Name</th>
+                        <th>Total Winnings</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="past-players">
+                    <!-- Past players will be added here -->
+                </tbody>
+            </table>
+        </div>
     </div>
-    <button id="add-player" class="add-player">Add Player</button>
     <script src="js/app.js"></script>
 </body>
 </html>
