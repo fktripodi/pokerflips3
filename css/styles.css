@@ -112,7 +112,7 @@ button {
     padding: 5px;
     cursor: pointer;
     margin: 2px 5px;
-    font-size: 0.8em; /* Smaller font for mobile */
+    font-size: 1.2em; /*ft -1 button Smaller font for mobile */
 }
 
 button:hover {
