@@ -8,13 +8,11 @@
 </head>
 <body>
     <div class="container">
-        <!-- Existing content here -->
         <div class="header">
             <div class="game-info">
                 <div class="info-box green">$<input type="number" id="hand-value" value="50" title="Hand Value"></div>
-                <div class="info-box">Games: <span id="games-played">0</span></div>
+                <div class="info-box">G: <span id="games-played">0</span></div>
                 <div class="info-box"><button id="restart-game">New Session</button></div>
-                <div class="info-box">Players: <span id="players-count">0</span></div>
             </div>
             <div class="dropdown">
                 <button class="dropbtn">DP</button>
@@ -26,16 +24,16 @@
         <table>
             <thead>
                 <tr>
-                    <th>Wins / Loses</th>
+                    <th class="small-column">Wins</th>
                     <th class="name-header">
-                        <label for="previous-players">Players: </label>
+                        <label for="previous-players">P: </label>
                         <select id="previous-players" title="Previous Players">
                             <option value="add" disabled selected>Add</option>
                             <option value="add-new">Add New Player</option>
                         </select>
                     </th>
                     <th>w</th>
-                    <th>Results</th>
+                    <th>$$</th>
                     <th>R</th>
                 </tr>
             </thead>
