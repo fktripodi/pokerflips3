@@ -20,7 +20,7 @@
             <thead>
                 <tr>
                     <th>WINS</th>
-                    <th>Name</th>
+                    <th>NAME</th>
                     <th>W</th>
                     <th>$$</th>
                     <th>R</th>
@@ -34,7 +34,7 @@
             <button id="delete-player">Delete Player</button>
             <label for="previous-players"></label>
             <select id="previous-players" title="Previous Players">
-                <option value="add Player"selected>Add Player</option>
+                <option value="add" disabled selected>Add Player</option>
                 <option value="add-new">Add New Player</option>
             </select>
             <button id="restart-game">New Game</button>
@@ -67,6 +67,7 @@
                 <button id="confirm-delete">Confirm Delete</button>
             </div>
         </div>
+        <audio id="click-sound" src="click-sound.mp3"></audio>
     </div>
     <script src="js/app.js"></script>
 </body>
