@@ -30,12 +30,14 @@
                 <!-- Players will be added here -->
             </tbody>
         </table>
-        <div class="control-buttons">
-            <label for="previous-players">Add Player: </label>
+        <div class="control-buttons top">
+            <label for="previous-players"> </label>
             <select id="previous-players" title="Previous Players">
                 <option value="add" disabled selected>Add</option>
                 <option value="add-new">Add New Player</option>
             </select>
+            <button id="delete-player">Delete Player</button>
+            <button id="restart-game">New Game</button>
         </div>
         <!-- New section for displaying Players History -->
         <div class="past-players-section">
@@ -52,10 +54,6 @@
                     <!-- Past players will be added here -->
                 </tbody>
             </table>
-        </div>
-        <div class="control-buttons">
-            <button id="delete-player">Delete Player</button>
-            <button id="restart-game">New Game</button>
         </div>
 
         <!-- Delete Player Modal -->
