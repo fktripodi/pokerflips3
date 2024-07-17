@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const playersContainer = document.getElementById('players');
     const gamesPlayedDisplay = document.getElementById('games-played');
     const previousPlayersDropdown = document.getElementById('previous-players');
-    const dropdownContent = document.getElementById('dropdown-content');
     const pastPlayersContainer = document.getElementById('past-players');
     let gameValue = 50;
 
@@ -32,17 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 previousPlayersDropdown.appendChild(option);
             }
         });
-        renderDropdownOptions();
-    }
-
-    function renderDropdownOptions() {
-        dropdownContent.innerHTML = '';
-        previousPlayers.forEach(playerName => {
-            const button = document.createElement('button');
-            button.textContent = `Delete ${playerName}`;
-            button.onclick = () => deletePlayer(playerName);
-            dropdownContent.appendChild(button);
-        });
     }
 
     function renderPlayers() {
@@ -50,15 +38,17 @@ document.addEventListener('DOMContentLoaded', () => {
         players.forEach((player, index) => {
             const playerRow = document.createElement('tr');
             playerRow.innerHTML = `
-                <td class="control-buttons controls small-column">
-                    <button onclick="updatePlayer(${index}, 'win', 1)">+1</button>
-                    <button onclick="updatePlayer(${index}, 'win', 2)">+2</button>
-                    <button onclick="updatePlayer(${index}, 'lose', 1)">-1</button>
+                <td class="py-3 px-4 border border-gray-300 flex items-center justify-center space-x-1">
+                    <button class="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded" onclick="updatePlayer(${index}, 'win', 1)">+1</button>
+                    <button class="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded" onclick="updatePlayer(${index}, 'win', 2)">+2</button>
+                    <button class="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded" onclick="updatePlayer(${index}, 'lose', 1)">-1</button>
                 </td>
-                <td class="name-column">${player.name}</td>
-                <td>${player.wins}</td>
-                <td class="results">$${player.result.toFixed(2).replace(/\.00$/, '')}</td>
-                <td><button class="remove-button" onclick="removePlayer(${index})">R</button></td>
+                <td class="py-3 px-4 border border-gray-300 text-center">${player.name}</td>
+                <td class="py-3 px-4 border border-gray-300 text-center">${player.wins}</td>
+                <td class="py-3 px-4 border border-gray-300 text-center ${player.result < 0 ? 'text-red-500' : ''}">$${player.result.toFixed(2).replace(/\.00$/, '')}</td>
+                <td class="py-3 px-4 border border-gray-300 text-center">
+                    <button class="bg-red-500 text-white w-8 h-8 flex items-center justify-center rounded" onclick="removePlayer(${index})">-</button>
+                </td>
             `;
             playersContainer.appendChild(playerRow);
         });
@@ -130,9 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (history[playerName] !== 0) {
                 const playerRow = document.createElement('tr');
                 playerRow.innerHTML = `
-                    <td>${playerName}</td>
-                    <td>$${history[playerName].toFixed(2).replace(/\.00$/, '')}</td>
-                    <td><button onclick="removePlayerHistory('${playerName}')">Clear History</button></td>
+                    <td class="py-3 px-4 border border-gray-300">${playerName}</td>
+                    <td class="py-3 px-4 border border-gray-300">${history[playerName].toFixed(2).replace(/\.00$/, '')}</td>
+                    <td class="py-3 px-4 border border-gray-300">
+                        <button class="bg-red-500 text-white w-full py-2 rounded" onclick="removePlayerHistory('${playerName}')">Delete Player</button>
+                    </td>
                 `;
                 pastPlayersContainer.appendChild(playerRow);
             }
