@@ -21,13 +21,13 @@ body {
 }
 
 .chip-buttons button {
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     border: none;
     color: white;
     font-size: 14px;
-    margin: 0 10px;
+    margin: 0 3px; /* Reduced margin to bring chips closer together */
     cursor: pointer;
 }
 
@@ -39,13 +39,9 @@ body {
     background-color: red;
 }
 
-.chip.active {
-    background-color: red;
-}
-
 .games-count {
-    width: 55px; /* Increased size */
-    height: 55px; /* Increased size */
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background-color: #007bff;
     color: white;
@@ -77,31 +73,33 @@ th {
 
 .action-buttons {
     display: flex;
-    justify-content: center;
-    gap: 10px; /* Added gap */
+    justify-content: space-between;
+    gap: 2px;
 }
 
 .action-buttons button {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     background-color: #007bff;
     color: white;
     border: none;
     cursor: pointer;
+    padding: 0;
+    margin: 0;
 }
 
 .delete-button {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     background-color: #dc3545;
     color: white;
     border: none;
     cursor: pointer;
-    font-size: 20px; /* Increase the font size */
+    font-size: 20px;
 }
 
 .past-players-section {
-    margin-top: 300px;
+    margin-top: 250px;
     text-align: left;
 }
 
@@ -132,8 +130,8 @@ th {
 }
 
 .control-buttons.top {
-    justify-content: space-around; /* Center the items */
-    gap: 10px; /* Adjust gap for better alignment */
+    justify-content: space-around;
+    gap: 10px;
 }
 
 .control-buttons button {
@@ -144,28 +142,28 @@ th {
 
 /* Modal styles */
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
+    display: none;
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; 
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; 
+    width: 80%;
     max-width: 500px;
     text-align: center;
-    max-height: 80vh; /* Ensure it does not exceed the viewport height */
-    overflow-y: auto; /* Scroll if content exceeds modal height */
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 .close {
@@ -185,8 +183,14 @@ th {
 #delete-player-dropdown {
     width: 100%;
     height: auto;
-    max-height: 300px; /* Maximum height to allow scrolling if there are too many players */
+    max-height: 300px;
     overflow-y: auto;
+}
+
+/* New class for clicked buttons */
+.clicked {
+    background-color: yellow;
+    color: black;
 }
 
 /* Media query for smaller screens */
@@ -197,20 +201,20 @@ th {
     }
 
     .chip-buttons button {
-        width: 60px;
-        height: 60px;
+        width: 55px;
+        height: 55px;
         font-size: 12px;
     }
 
     .games-count {
-        width: 60px; /* Adjusted size for small screens */
-        height: 60px; /* Adjusted size for small screens */
+        width: 55px;
+        height: 55px;
         font-size: 14px;
     }
 
     .action-buttons button {
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
         font-size: 10px;
     }
 
@@ -218,4 +222,31 @@ th {
         padding: 8px 16px;
         font-size: 0.9em;
     }
+}
+
+/* Add this to your existing CSS */
+
+/* Target the WINS column */
+th:nth-child(1), td:nth-child(1) {
+    width: 50px; /* Adjust this value to your desired width */
+}
+
+/* Target the NAME column */
+th:nth-child(2), td:nth-child(2) {
+    width: 80px; /* Adjust this value to your desired width */
+}
+
+/* Target the W column */
+th:nth-child(3), td:nth-child(3) {
+    width: 20px; /* Adjust this value to your desired width */
+}
+
+/* Target the $$ column */
+th:nth-child(4), td:nth-child(4) {
+    width: 30px; /* Adjust this value to your desired width */
+}
+
+/* Target the R column */
+th:nth-child(5), td:nth-child(5) {
+    width: 5px; /* Adjust this value to your desired width */
 }
