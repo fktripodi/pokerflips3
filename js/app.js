@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     let players = JSON.parse(localStorage.getItem('players')) || [];
-    const previousPlayers = JSON.parse(localStorage.getItem('previousPlayers')) || [];
+    let previousPlayers = JSON.parse(localStorage.getItem('previousPlayers')) || [];
     let gamesPlayed = JSON.parse(localStorage.getItem('gamesPlayed')) || 0;
     const restartGameButton = document.getElementById('restart-game');
     const deletePlayerButton = document.getElementById('delete-player');
@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const gamesPlayedDisplay = document.getElementById('games-played');
     const previousPlayersDropdown = document.getElementById('previous-players');
     const pastPlayersContainer = document.getElementById('past-players');
+    const deletePlayerModal = document.getElementById('delete-player-modal');
+    const deletePlayerDropdown = document.getElementById('delete-player-dropdown');
+    const confirmDeleteButton = document.getElementById('confirm-delete');
+    const closeModal = document.querySelector('.close');
     let gameValue = 50;
 
     const chips = document.querySelectorAll('.chip');
@@ -20,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function renderPreviousPlayers() {
-        previousPlayers.sort();
         const currentPlayersNames = players.map(player => player.name);
         previousPlayersDropdown.innerHTML = '<option value="add" disabled selected>Add</option><option value="add-new">Add New Player</option>';
         previousPlayers.forEach(playerName => {
@@ -38,22 +41,23 @@ document.addEventListener('DOMContentLoaded', () => {
         players.forEach((player, index) => {
             const playerRow = document.createElement('tr');
             playerRow.innerHTML = `
-                <td class="py-3 px-4 border border-gray-300 flex items-center justify-center space-x-1">
-                    <button class="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded" onclick="updatePlayer(${index}, 'win', 1)">+1</button>
-                    <button class="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded" onclick="updatePlayer(${index}, 'win', 2)">+2</button>
-                    <button class="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded" onclick="updatePlayer(${index}, 'lose', 1)">-1</button>
+                <td>
+                    <div class="action-buttons">
+                        <button onclick="updatePlayer(${index}, 'win', 1)">+1</button>
+                        <button onclick="updatePlayer(${index}, 'win', 2)">+2</button>
+                        <button onclick="updatePlayer(${index}, 'lose', 1)">-1</button>
+                    </div>
                 </td>
-                <td class="py-3 px-4 border border-gray-300 text-center">${player.name}</td>
-                <td class="py-3 px-4 border border-gray-300 text-center">${player.wins}</td>
-                <td class="py-3 px-4 border border-gray-300 text-center ${player.result < 0 ? 'text-red-500' : ''}">$${player.result.toFixed(2).replace(/\.00$/, '')}</td>
-                <td class="py-3 px-4 border border-gray-300 text-center">
-                    <button class="bg-red-500 text-white w-8 h-8 flex items-center justify-center rounded" onclick="removePlayer(${index})">-</button>
-                </td>
+                <td>${player.name}</td>
+                <td>${player.wins}</td>
+                <td class="results">$${player.result.toFixed(2).replace(/\.00$/, '')}</td>
+                <td><button class="delete-button" onclick="removePlayer(${index})">-</button></td>
             `;
             playersContainer.appendChild(playerRow);
         });
         renderGamesPlayed();
         renderPreviousPlayers();
+        updateDeletePlayerDropdown();
     }
 
     function renderGamesPlayed() {
@@ -65,22 +69,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (action === 'win') {
             players[index].wins += multiplier;
             players[index].result += adjustedHandValue * (players.length - 1);
-            players[index].history += adjustedHandValue * (players.length - 1);
             players.forEach((player, idx) => {
                 if (idx !== index) {
                     player.result -= adjustedHandValue;
-                    player.history -= adjustedHandValue;
                 }
             });
             gamesPlayed += multiplier;
         } else if (action === 'lose') {
             players[index].wins -= multiplier;
             players[index].result -= adjustedHandValue * (players.length - 1);
-            players[index].history -= adjustedHandValue * (players.length - 1);
             players.forEach((player, idx) => {
                 if (idx !== index) {
                     player.result += adjustedHandValue;
-                    player.history += adjustedHandValue;
                 }
             });
             gamesPlayed -= 1;
@@ -88,29 +88,23 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('players', JSON.stringify(players));
         localStorage.setItem('gamesPlayed', JSON.stringify(gamesPlayed));
         renderPlayers();
-        renderGamesPlayed();
-        renderPastPlayers();
     };
 
     window.removePlayer = (index) => {
         const playerName = players[index].name;
-        const history = JSON.parse(localStorage.getItem('history')) || {};
-        history[playerName] = (history[playerName] || 0) + players[index].result;
-        localStorage.setItem('history', JSON.stringify(history));
         players.splice(index, 1);
         localStorage.setItem('players', JSON.stringify(players));
         renderPlayers();
         renderGamesPlayed();
-        renderPastPlayers();
+        addPlayerToDropdown(playerName);
     };
 
-    function deletePlayer(playerName) {
-        const index = previousPlayers.indexOf(playerName);
-        if (index !== -1) {
-            previousPlayers.splice(index, 1);
+    function addPlayerToDropdown(playerName) {
+        if (!previousPlayers.includes(playerName)) {
+            previousPlayers.push(playerName);
             localStorage.setItem('previousPlayers', JSON.stringify(previousPlayers));
-            renderPreviousPlayers();
         }
+        renderPreviousPlayers();
     }
 
     function renderPastPlayers() {
@@ -120,11 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (history[playerName] !== 0) {
                 const playerRow = document.createElement('tr');
                 playerRow.innerHTML = `
-                    <td class="py-3 px-4 border border-gray-300">${playerName}</td>
-                    <td class="py-3 px-4 border border-gray-300">${history[playerName].toFixed(2).replace(/\.00$/, '')}</td>
-                    <td class="py-3 px-4 border border-gray-300">
-                        <button class="bg-red-500 text-white w-full py-2 rounded" onclick="removePlayerHistory('${playerName}')">Delete Player</button>
-                    </td>
+                    <td>${playerName}</td>
+                    <td>$${history[playerName].toFixed(2).replace(/\.00$/, '')}</td>
+                    <td><button onclick="removePlayerHistory('${playerName}')">Clear History</button></td>
                 `;
                 pastPlayersContainer.appendChild(playerRow);
             }
@@ -140,25 +132,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function updateDeletePlayerDropdown() {
+        deletePlayerDropdown.innerHTML = '';
+        previousPlayers.forEach(player => {
+            const option = document.createElement('option');
+            option.value = player;
+            option.textContent = player;
+            deletePlayerDropdown.appendChild(option);
+        });
+
+        // Adjust the size of the dropdown to fit all players
+        deletePlayerDropdown.size = previousPlayers.length > 0 ? previousPlayers.length : 1;
+    }
+
     previousPlayersDropdown.addEventListener('change', () => {
         const selectedPlayer = previousPlayersDropdown.value;
         if (selectedPlayer === "add-new") {
             const playerName = prompt("Enter player name:").trim();
             if (playerName && !previousPlayers.includes(playerName)) {
-                const player = { name: playerName, wins: 0, result: 0, history: 0 };
+                const player = { name: playerName, wins: 0, result: 0 };
                 players.push(player);
                 previousPlayers.push(playerName);
                 localStorage.setItem('previousPlayers', JSON.stringify(previousPlayers));
                 localStorage.setItem('players', JSON.stringify(players));
                 renderPlayers();
-                renderPreviousPlayers();
             }
         } else if (selectedPlayer !== "add") {
             let player = players.find(p => p.name === selectedPlayer);
             if (!player) {
-                const history = JSON.parse(localStorage.getItem('history')) || {};
-                const playerHistory = history[selectedPlayer] || 0;
-                player = { name: selectedPlayer, wins: 0, result: 0, history: playerHistory };
+                player = { name: selectedPlayer, wins: 0, result: 0 };
                 players.push(player);
                 localStorage.setItem('players', JSON.stringify(players));
                 renderPlayers();
@@ -167,38 +169,44 @@ document.addEventListener('DOMContentLoaded', () => {
         previousPlayersDropdown.value = "add";
     });
 
+    deletePlayerButton.addEventListener('click', () => {
+        updateDeletePlayerDropdown();
+        deletePlayerModal.style.display = 'block';
+    });
+
+    confirmDeleteButton.addEventListener('click', () => {
+        const selectedOptions = Array.from(deletePlayerDropdown.selectedOptions);
+        selectedOptions.forEach(option => {
+            const playerName = option.value;
+            previousPlayers = previousPlayers.filter(p => p !== playerName);
+        });
+        localStorage.setItem('previousPlayers', JSON.stringify(previousPlayers));
+        updateDeletePlayerDropdown();
+        renderPreviousPlayers();
+    });
+
+    closeModal.addEventListener('click', () => {
+        deletePlayerModal.style.display = 'none';
+    });
+
+    window.onclick = (event) => {
+        if (event.target == deletePlayerModal) {
+            deletePlayerModal.style.display = 'none';
+        }
+    };
+
     restartGameButton.addEventListener('click', () => {
-        const history = JSON.parse(localStorage.getItem('history')) || {};
         players.forEach(player => {
-            history[player.name] = (history[player.name] || 0) + player.result;
-            player.history += player.result;
             player.result = 0;
             player.wins = 0;
         });
         gamesPlayed = 0;
-        localStorage.setItem('history', JSON.stringify(history));
         localStorage.setItem('players', JSON.stringify(players));
         localStorage.setItem('gamesPlayed', JSON.stringify(gamesPlayed));
         renderPlayers();
-        renderGamesPlayed();
-        renderPreviousPlayers();
-        renderPastPlayers();
-    });
-
-    deletePlayerButton.addEventListener('click', () => {
-        const playerName = prompt("Enter the name of the player to delete:").trim();
-        if (playerName) {
-            const index = players.findIndex(p => p.name === playerName);
-            if (index !== -1) {
-                removePlayer(index);
-            } else {
-                alert("Player not found.");
-            }
-        }
     });
 
     renderPlayers();
     renderGamesPlayed();
-    renderPreviousPlayers();
     renderPastPlayers();
 });
