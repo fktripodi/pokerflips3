@@ -150,82 +150,72 @@ document.addEventListener('DOMContentLoaded', () => {
             deletePlayerDropdown.appendChild(option);
         });
 
-        // Adjust```javascript
-function updateDeletePlayerDropdown() {
-    deletePlayerDropdown.innerHTML = '';
-    previousPlayers.forEach(player => {
-        const option = document.createElement('option');
-        option.value = player;
-        option.textContent = player;
-        deletePlayerDropdown.appendChild(option);
-    });
-
-    // Adjust the size of the dropdown to fit all players
-    deletePlayerDropdown.size = previousPlayers.length > 0 ? previousPlayers.length : 1;
-}
-
-previousPlayersDropdown.addEventListener('change', () => {
-    const selectedPlayer = previousPlayersDropdown.value;
-    if (selectedPlayer === "add-new") {
-        const playerName = prompt("Enter player name:").trim();
-        if (playerName && !previousPlayers.includes(playerName)) {
-            const player = { name: playerName, wins: 0, result: 0 };
-            players.push(player);
-            previousPlayers.push(playerName);
-            localStorage.setItem('previousPlayers', JSON.stringify(previousPlayers));
-            localStorage.setItem('players', JSON.stringify(players));
-            renderPlayers();
-        }
-    } else if (selectedPlayer !== "add") {
-        let player = players.find(p => p.name === selectedPlayer);
-        if (!player) {
-            player = { name: selectedPlayer, wins: 0, result: 0 };
-            players.push(player);
-            localStorage.setItem('players', JSON.stringify(players));
-            renderPlayers();
-        }
+        // Adjust the size of the dropdown to fit all players
+        deletePlayerDropdown.size = previousPlayers.length > 0 ? previousPlayers.length : 1;
     }
-    previousPlayersDropdown.value = "add";
-});
 
-deletePlayerButton.addEventListener('click', () => {
-    updateDeletePlayerDropdown();
-    deletePlayerModal.style.display = 'block';
-});
-
-confirmDeleteButton.addEventListener('click', () => {
-    const selectedOptions = Array.from(deletePlayerDropdown.selectedOptions);
-    selectedOptions.forEach(option => {
-        const playerName = option.value;
-        previousPlayers = previousPlayers.filter(p => p !== playerName);
+    previousPlayersDropdown.addEventListener('change', () => {
+        const selectedPlayer = previousPlayersDropdown.value;
+        if (selectedPlayer === "add-new") {
+            const playerName = prompt("Enter player name:").trim();
+            if (playerName && !previousPlayers.includes(playerName)) {
+                const player = { name: playerName, wins: 0, result: 0 };
+                players.push(player);
+                previousPlayers.push(playerName);
+                localStorage.setItem('previousPlayers', JSON.stringify(previousPlayers));
+                localStorage.setItem('players', JSON.stringify(players));
+                renderPlayers();
+            }
+        } else if (selectedPlayer !== "add") {
+            let player = players.find(p => p.name === selectedPlayer);
+            if (!player) {
+                player = { name: selectedPlayer, wins: 0, result: 0 };
+                players.push(player);
+                localStorage.setItem('players', JSON.stringify(players));
+                renderPlayers();
+            }
+        }
+        previousPlayersDropdown.value = "add";
     });
-    localStorage.setItem('previousPlayers', JSON.stringify(previousPlayers));
-    updateDeletePlayerDropdown();
-    renderPreviousPlayers();
-});
 
-closeModal.addEventListener('click', () => {
-    deletePlayerModal.style.display = 'none';
-});
+    deletePlayerButton.addEventListener('click', () => {
+        updateDeletePlayerDropdown();
+        deletePlayerModal.style.display = 'block';
+    });
 
-window.onclick = (event) => {
-    if (event.target == deletePlayerModal) {
+    confirmDeleteButton.addEventListener('click', () => {
+        const selectedOptions = Array.from(deletePlayerDropdown.selectedOptions);
+        selectedOptions.forEach(option => {
+            const playerName = option.value;
+            previousPlayers = previousPlayers.filter(p => p !== playerName);
+        });
+        localStorage.setItem('previousPlayers', JSON.stringify(previousPlayers));
+        updateDeletePlayerDropdown();
+        renderPreviousPlayers();
+    });
+
+    closeModal.addEventListener('click', () => {
         deletePlayerModal.style.display = 'none';
-    }
-};
-
-restartGameButton.addEventListener('click', () => {
-    players.forEach(player => {
-        player.result = 0;
-        player.wins = 0;
     });
-    gamesPlayed = 0;
-    localStorage.setItem('players', JSON.stringify(players));
-    localStorage.setItem('gamesPlayed', JSON.stringify(gamesPlayed));
-    renderPlayers();
-});
 
-renderPlayers();
-renderGamesPlayed();
-renderPastPlayers();
+    window.onclick = (event) => {
+        if (event.target == deletePlayerModal) {
+            deletePlayerModal.style.display = 'none';
+        }
+    };
+
+    restartGameButton.addEventListener('click', () => {
+        players.forEach(player => {
+            player.result = 0;
+            player.wins = 0;
+        });
+        gamesPlayed = 0;
+        localStorage.setItem('players', JSON.stringify(players));
+        localStorage.setItem('gamesPlayed', JSON.stringify(gamesPlayed));
+        renderPlayers();
+    });
+
+    renderPlayers();
+    renderGamesPlayed();
+    renderPastPlayers();
 });
