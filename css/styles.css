@@ -1,4 +1,3 @@
-/* Existing styles */
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -11,7 +10,7 @@ body {
 .container {
     text-align: center;
     background-color: white;
-    padding: 550px;
+    padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -22,8 +21,8 @@ body {
 }
 
 .chip-buttons button {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     border: none;
     color: white;
@@ -45,8 +44,8 @@ body {
 }
 
 .games-count {
-    width: 50px;
-    height: 50px;
+    width: 60px; /* Increased size */
+    height: 60px; /* Increased size */
     border-radius: 50%;
     background-color: #007bff;
     color: white;
@@ -79,6 +78,7 @@ th {
 .action-buttons {
     display: flex;
     justify-content: center;
+    gap: 10px; /* Added gap */
 }
 
 .action-buttons button {
@@ -87,7 +87,6 @@ th {
     background-color: #007bff;
     color: white;
     border: none;
-    margin: 0 2px;
     cursor: pointer;
 }
 
@@ -198,8 +197,8 @@ th {
     }
 
     .games-count {
-        width: 40px;
-        height: 40px;
+        width: 50px; /* Adjusted size for small screens */
+        height: 50px; /* Adjusted size for small screens */
         font-size: 14px;
     }
 
