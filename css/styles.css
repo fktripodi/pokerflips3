@@ -10,7 +10,7 @@ body {
 .container {
     text-align: center;
     background-color: white;
-    padding: 20px;
+    padding: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -21,8 +21,8 @@ body {
 }
 
 .chip-buttons button {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: none;
     color: white;
@@ -44,8 +44,8 @@ body {
 }
 
 .games-count {
-    width: 60px; /* Increased size */
-    height: 60px; /* Increased size */
+    width: 70px; /* Increased size */
+    height: 70px; /* Increased size */
     border-radius: 50%;
     background-color: #007bff;
     color: white;
@@ -97,10 +97,11 @@ th {
     color: white;
     border: none;
     cursor: pointer;
+    font-size: 20px; /* Increase the font size */
 }
 
 .past-players-section {
-    margin-top: 20px;
+    margin-top: 200px;
     text-align: left;
 }
 
@@ -131,7 +132,7 @@ th {
 }
 
 .control-buttons.top {
-    justify-content: space-between; /* Make items evenly distributed */
+    justify-content: space-around; /* Center the items */
     gap: 10px; /* Adjust gap for better alignment */
 }
 
@@ -196,14 +197,14 @@ th {
     }
 
     .chip-buttons button {
-        width: 40px;
-        height: 40px;
+        width: 60px;
+        height: 60px;
         font-size: 12px;
     }
 
     .games-count {
-        width: 50px; /* Adjusted size for small screens */
-        height: 50px; /* Adjusted size for small screens */
+        width: 60px; /* Adjusted size for small screens */
+        height: 60px; /* Adjusted size for small screens */
         font-size: 14px;
     }
 
