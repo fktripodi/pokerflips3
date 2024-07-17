@@ -4,61 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poker Hand Tracker</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .chip.active {
+            background-color: #f56565;
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <!-- Circle for quantity of games -->
-            <div class="info-box blue small"><span id="games-played">3</span></div>
-            <!-- Poker chip buttons -->
-            <div class="poker-chips">
-                <button class="chip" data-value="25">$25</button>
-                <button class="chip" data-value="50">$50</button>
-                <button class="chip" data-value="100">$100</button>
-                <button class="chip" data-value="500">$500</button>
-                <button class="chip" data-value="1000">$1000</button>
-            </div>
+<body class="p-6 bg-gray-100">
+    <div class="container mx-auto">
+        <div class="flex flex-wrap space-x-4 mb-6">
+            <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white text-lg mb-2"><span id="games-played">3</span></div>
+            <button class="chip px-4 py-2 bg-green-500 text-white rounded-full mb-2" data-value="25">$25</button>
+            <button class="chip px-4 py-2 bg-green-500 text-white rounded-full mb-2" data-value="50">$50</button>
+            <button class="chip px-4 py-2 bg-green-500 text-white rounded-full mb-2" data-value="100">$100</button>
+            <button class="chip px-4 py-2 bg-green-500 text-white rounded-full mb-2" data-value="500">$500</button>
+            <button class="chip px-4 py-2 bg-red-500 text-white rounded-full mb-2" data-value="1000">$1000</button>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th class="small-column">Wins</th>
-                    <th class="name-header">
-                        <label for="previous-players">P: </label>
-                        <select id="previous-players" title="Previous Players">
-                            <option value="add" disabled selected>Add</option>
-                            <option value="add-new">Add New Player</option>
-                        </select>
-                    </th>
-                    <th>w</th>
-                    <th>$$</th>
-                    <th>R</th>
-                </tr>
-            </thead>
-            <tbody id="players">
-                <!-- Players will be added here -->
-            </tbody>
-        </table>
-        <!-- New section for displaying Players History -->
-        <div class="past-players-section">
-            <h2>Players History</h2>
-            <table>
+        <div class="player-controls mb-4">
+            <label for="previous-players" class="mr-2">P: </label>
+            <select id="previous-players" title="Previous Players" class="border border-gray-300 p-2 rounded">
+                <option value="add" disabled selected>Add</option>
+                <option value="add-new">Add New Player</option>
+            </select>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-300 mb-6">
                 <thead>
-                    <tr>
-                        <th>Player Name</th>
-                        <th>Total Winnings</th>
-                        <th>Action</th>
+                    <tr class="bg-blue-500 text-white">
+                        <th class="py-3 px-4 border border-gray-300">WINS</th>
+                        <th class="py-3 px-4 border border-gray-300">PLAYERS</th>
+                        <th class="py-3 px-4 border border-gray-300">W</th>
+                        <th class="py-3 px-4 border border-gray-300">$$</th>
+                        <th class="py-3 px-4 border border-gray-300">R</th>
                     </tr>
                 </thead>
-                <tbody id="past-players">
-                    <!-- Past players will be added here -->
+                <tbody id="players">
+                    <!-- Players will be added here dynamically -->
                 </tbody>
             </table>
         </div>
-        <div class="control-buttons">
-            <button id="delete-player">Delete Player</button>
-            <button id="restart-game">New Game</button>
+        <div class="past-players-section mb-6">
+            <h2 class="bg-purple-700 text-white py-3 px-4 rounded">Players History</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-300">
+                    <thead>
+                        <tr class="bg-purple-700 text-white">
+                            <th class="py-3 px-4 border border-gray-300">Player Name</th>
+                            <th class="py-3 px-4 border border-gray-300">Total Winnings</th>
+                            <th class="py-3 px-4 border border-gray-300">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="past-players">
+                        <!-- Past players will be added here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="control-buttons flex flex-wrap space-x-4">
+            <button id="delete-player" class="px-4 py-2 bg-red-500 text-white rounded mb-2">Delete Player</button>
+            <button id="restart-game" class="px-4 py-2 bg-green-500 text-white rounded mb-2">New Game</button>
         </div>
     </div>
     <script src="js/app.js"></script>
