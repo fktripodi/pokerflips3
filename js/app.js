@@ -3,12 +3,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const previousPlayers = JSON.parse(localStorage.getItem('previousPlayers')) || [];
     let gamesPlayed = JSON.parse(localStorage.getItem('gamesPlayed')) || 0;
     const restartGameButton = document.getElementById('restart-game');
-    const handValueInput = document.getElementById('hand-value');
+    const deletePlayerButton = document.getElementById('delete-player');
     const playersContainer = document.getElementById('players');
     const gamesPlayedDisplay = document.getElementById('games-played');
     const previousPlayersDropdown = document.getElementById('previous-players');
     const dropdownContent = document.getElementById('dropdown-content');
     const pastPlayersContainer = document.getElementById('past-players');
+    let gameValue = 50;
+
+    const chips = document.querySelectorAll('.chip');
+    chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            gameValue = parseFloat(chip.dataset.value);
+            chips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+        });
+    });
 
     function renderPreviousPlayers() {
         previousPlayers.sort();
@@ -43,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td class="control-buttons controls small-column">
                     <button onclick="updatePlayer(${index}, 'win', 1)">+1</button>
                     <button onclick="updatePlayer(${index}, 'win', 2)">+2</button>
-                    <button onclick="updatePlayer(${index}, 'win', 4)">+4</button>
                     <button onclick="updatePlayer(${index}, 'lose', 1)">-1</button>
                 </td>
                 <td class="name-column">${player.name}</td>
@@ -54,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             playersContainer.appendChild(playerRow);
         });
         renderGamesPlayed();
-        renderPreviousPlayers(); // Re-render dropdown options to reflect current players
+        renderPreviousPlayers();
     }
 
     function renderGamesPlayed() {
@@ -62,27 +71,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.updatePlayer = (index, action, multiplier = 1) => {
-        const handValue = parseFloat(handValueInput.value) || 50;
-        const adjustedHandValue = handValue * multiplier;
+        const adjustedHandValue = gameValue * multiplier;
         if (action === 'win') {
             players[index].wins += multiplier;
             players[index].result += adjustedHandValue * (players.length - 1);
-            players[index].history += adjustedHandValue * (players.length - 1); // Update history
+            players[index].history += adjustedHandValue * (players.length - 1);
             players.forEach((player, idx) => {
                 if (idx !== index) {
                     player.result -= adjustedHandValue;
-                    player.history -= adjustedHandValue; // Update history
+                    player.history -= adjustedHandValue;
                 }
             });
             gamesPlayed += multiplier;
         } else if (action === 'lose') {
             players[index].wins -= multiplier;
             players[index].result -= adjustedHandValue * (players.length - 1);
-            players[index].history -= adjustedHandValue * (players.length - 1); // Update history
+            players[index].history -= adjustedHandValue * (players.length - 1);
             players.forEach((player, idx) => {
                 if (idx !== index) {
                     player.result += adjustedHandValue;
-                    player.history += adjustedHandValue; // Update history
+                    player.history += adjustedHandValue;
                 }
             });
             gamesPlayed -= 1;
@@ -91,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('gamesPlayed', JSON.stringify(gamesPlayed));
         renderPlayers();
         renderGamesPlayed();
-        renderPastPlayers(); // Update past players list in real-time
+        renderPastPlayers();
     };
 
     window.removePlayer = (index) => {
@@ -103,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('players', JSON.stringify(players));
         renderPlayers();
         renderGamesPlayed();
-        renderPastPlayers(); // Update past players list after removal
+        renderPastPlayers();
     };
 
     function deletePlayer(playerName) {
@@ -136,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (history[playerName]) {
             delete history[playerName];
             localStorage.setItem('history', JSON.stringify(history));
-            renderPastPlayers(); // Re-render the past players list
+            renderPastPlayers();
         }
     }
 
@@ -164,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderPlayers();
             }
         }
-        previousPlayersDropdown.value = "add"; // Reset the dropdown to "Add" after selecting a player
+        previousPlayersDropdown.value = "add";
     });
 
     restartGameButton.addEventListener('click', () => {
@@ -182,11 +190,23 @@ document.addEventListener('DOMContentLoaded', () => {
         renderPlayers();
         renderGamesPlayed();
         renderPreviousPlayers();
-        renderPastPlayers(); // Update past players list after restarting the game
+        renderPastPlayers();
+    });
+
+    deletePlayerButton.addEventListener('click', () => {
+        const playerName = prompt("Enter the name of the player to delete:").trim();
+        if (playerName) {
+            const index = players.findIndex(p => p.name === playerName);
+            if (index !== -1) {
+                removePlayer(index);
+            } else {
+                alert("Player not found.");
+            }
+        }
     });
 
     renderPlayers();
     renderGamesPlayed();
     renderPreviousPlayers();
-    renderPastPlayers(); // Initial render of past players
+    renderPastPlayers();
 });
