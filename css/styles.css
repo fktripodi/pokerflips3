@@ -21,8 +21,8 @@ body {
 }
 
 .chip-buttons button {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     border: none;
     color: white;
@@ -44,8 +44,8 @@ body {
 }
 
 .games-count {
-    width: 60px; /* Increased size */
-    height: 60px; /* Increased size */
+    width: 55px; /* Increased size */
+    height: 55px; /* Increased size */
     border-radius: 50%;
     background-color: #007bff;
     color: white;
