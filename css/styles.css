@@ -213,8 +213,21 @@ th {
     .games-count {
         width: 80px;
         height: 80px;
-        font-size: 40px; 
+        font-size: 40px;
     } 
+
+    .action-buttons button {
+        width: 40px !important; /* Override media query size */
+        height: 40px !important; /* Override media query size */
+        font-size: 25px !important; /* Override media query font size */
+    }
+
+    .control-buttons button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+}
+
 
   /* Increase font size for player names */
 #players td:nth-child(2) {
