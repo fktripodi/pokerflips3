@@ -386,4 +386,10 @@ th {
     border-radius: 50%;
     cursor: pointer;
 
+
+    
+    /* Active chip styling */
+.chip.active {
+    border: 2px solid red; /* Outline to indicate the active chip */
+
     }
