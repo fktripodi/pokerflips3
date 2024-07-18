@@ -236,6 +236,9 @@ th {
         padding: 8px 16px;
         font-size: 0.9em;
     }
+
+     .action-buttons {
+        gap: 3px; /* Adjust gap for media queries */
 }
 
 
