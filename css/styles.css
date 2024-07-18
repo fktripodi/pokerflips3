@@ -1,3 +1,133 @@
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+    th, td {
+        padding: 4px;
+        font-size: 12px;
+    }
+
+
+    #players td:nth-child(2) {
+        font-size: 25px !important; /* Adjust this value to your desired font size */
+        font-weight: bold !important; /* Make the text bold */
+    }
+    
+    
+    #players td:nth-child(3) {
+        font-size: 15px !important; /* Adjust this value to your desired font size */
+        font-weight: bold !important; /* Make the text bold */
+    }
+            #players td:nth-child(4) {
+        font-size: 25px !important; /* Adjust this value to your desired font size */
+        font-weight: bold !important; /* Make the text bold */  
+     }
+            .negative-amount {
+        color: red !important;
+        font-weight: bold !important;
+    }
+    .positive-amount {
+        color: green !important;
+        font-weight: bold !important;
+
+    }
+        
+    .chip-buttons button {
+        width: 55px;
+        height: 55px;
+        font-size: 12px;
+    }
+
+    .games-count {
+        width: 80px;
+        height: 80px;
+        font-size: 40px;
+    } 
+                
+/* blue button +- */
+    .action-buttons button {
+        width: 50px !important; /* Override media query size */
+        height: 50px !important; /* Override media query size */
+        font-size: 30px !important; /* Override media query font size */
+    }
+        .delete-button { /* red button */
+        width: 100% !important; /* Make the button take the full width of the cell */
+        height: 100% !important; /* Make the button take the full height of the cell */
+        font-size: 14px !important; /* Adjust this value to your desired font size */
+    }
+
+    .control-buttons button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+
+     .action-buttons {
+        gap: 1px; /* Adjust gap for media queries */
+}
+
+
+  /* Increase font size for player names */
+#players td:nth-child(2) {
+    font-size: 18px; /* Adjust this value to your desired font size */
+  
+/* Target the $$ column font size */
+#players td:nth-child(4) {
+    font-size: 20px !important; /* Adjust this value to your desired font size */
+}
+
+}
+
+    .action-buttons button {
+        width: 25px;
+        height: 25px;
+        font-size: 10px;
+    }
+
+    .control-buttons button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+}
+
+
+/* Target the WINS column */
+th:nth-child(1), td:nth-child(1) {
+    width: 50px; /* Adjust this value to your desired width */
+}
+
+/* Target the NAME column */
+th:nth-child(2), td:nth-child(2) {
+    width: 80px; /* Adjust this value to your desired width */
+}
+
+/* Target the W column */
+th:nth-child(3), td:nth-child(3) {
+    width: 20px; /* Adjust this value to your desired width */
+}
+
+/* Target the $$ column */
+th:nth-child(4), td:nth-child(4) {
+    width: 20px; /* Adjust this value to your desired width */
+}
+
+/* Ensure the R column remains the same width */
+th:nth-child(5), td:nth-child(5) {
+    width: 10px; /* Fixed width for the R column */
+    max-width: 10px; /* Ensure it doesn't stretch */
+    min-width: 10px; /* Ensure it doesn't shrink */
+}
+
+/* Disable text selection */
+body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+/* Disable double-tap to zoom */
+button {
+    touch-action: manipulation; /* Prevents double-tap to zoom on buttons */
+}
+
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -202,132 +332,3 @@ th {
     color: black;
 }
 
-/* Media query for smaller screens */
-@media screen and (max-width: 600px) {
-    th, td {
-        padding: 4px;
-        font-size: 12px;
-    }
-
-
-    #players td:nth-child(2) {
-        font-size: 25px !important; /* Adjust this value to your desired font size */
-        font-weight: bold !important; /* Make the text bold */
-    }
-    
-    
-    #players td:nth-child(3) {
-        font-size: 15px !important; /* Adjust this value to your desired font size */
-        font-weight: bold !important; /* Make the text bold */
-    }
-            #players td:nth-child(4) {
-        font-size: 25px !important; /* Adjust this value to your desired font size */
-        font-weight: bold !important; /* Make the text bold */  
-     }
-            .negative-amount {
-        color: red !important;
-        font-weight: bold !important;
-    }
-    .positive-amount {
-        color: green !important;
-        font-weight: bold !important;
-
-    }
-        
-    .chip-buttons button {
-        width: 55px;
-        height: 55px;
-        font-size: 12px;
-    }
-
-    .games-count {
-        width: 80px;
-        height: 80px;
-        font-size: 40px;
-    } 
-                
-/* blue button +- */
-    .action-buttons button {
-        width: 50px !important; /* Override media query size */
-        height: 50px !important; /* Override media query size */
-        font-size: 30px !important; /* Override media query font size */
-    }
-        .delete-button { /* red button */
-        width: 100% !important; /* Make the button take the full width of the cell */
-        height: 100% !important; /* Make the button take the full height of the cell */
-        font-size: 14px !important; /* Adjust this value to your desired font size */
-    }
-
-    .control-buttons button {
-        padding: 8px 16px;
-        font-size: 0.9em;
-    }
-
-     .action-buttons {
-        gap: 1px; /* Adjust gap for media queries */
-}
-
-
-  /* Increase font size for player names */
-#players td:nth-child(2) {
-    font-size: 18px; /* Adjust this value to your desired font size */
-  
-/* Target the $$ column font size */
-#players td:nth-child(4) {
-    font-size: 20px !important; /* Adjust this value to your desired font size */
-}
-
-}
-
-    .action-buttons button {
-        width: 25px;
-        height: 25px;
-        font-size: 10px;
-    }
-
-    .control-buttons button {
-        padding: 8px 16px;
-        font-size: 0.9em;
-    }
-}
-
-
-/* Target the WINS column */
-th:nth-child(1), td:nth-child(1) {
-    width: 50px; /* Adjust this value to your desired width */
-}
-
-/* Target the NAME column */
-th:nth-child(2), td:nth-child(2) {
-    width: 80px; /* Adjust this value to your desired width */
-}
-
-/* Target the W column */
-th:nth-child(3), td:nth-child(3) {
-    width: 20px; /* Adjust this value to your desired width */
-}
-
-/* Target the $$ column */
-th:nth-child(4), td:nth-child(4) {
-    width: 20px; /* Adjust this value to your desired width */
-}
-
-/* Ensure the R column remains the same width */
-th:nth-child(5), td:nth-child(5) {
-    width: 10px; /* Fixed width for the R column */
-    max-width: 10px; /* Ensure it doesn't stretch */
-    min-width: 10px; /* Ensure it doesn't shrink */
-}
-
-/* Disable text selection */
-body {
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-    user-select: none; /* Standard */
-}
-
-/* Disable double-tap to zoom */
-button {
-    touch-action: manipulation; /* Prevents double-tap to zoom on buttons */
-}
