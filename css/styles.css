@@ -15,6 +15,22 @@ th:nth-child(5), td:nth-child(5) {
     width: 50px !important; /* Adjust this value to your desired width */
 }
 
+    /* Make "Delete Player," "Add Player," and "New Game" buttons larger */
+    #delete-player, #previous-players, #restart-game {
+        font-size: 2em !important; /* Increase font size */
+        padding: 12px 24px !important; /* Increase padding */
+        background-color: #ff0000 !important; /* Change background color to red */
+        color: white !important; /* Ensure text is white */
+        border: none !important; /* Remove border */
+        border-radius: 5px !important; /* Add border radius */
+        margin: 5px !important; /* Add margin for spacing */
+        cursor: pointer !important; /* Ensure pointer cursor */
+    }
+
+    #previous-players {
+        font-size: 1.2em !important; /* Increase font size for select */
+    }
+}
     
     #players td:nth-child(3) { /* cells under "W" */
         font-size: 15px !important; /* Adjust this value to your desired font size */
