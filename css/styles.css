@@ -52,7 +52,7 @@
     .delete-button { /* red button */
         width: 100% !important; /* Make the button take the full width of the cell */
         height: 100% !important; /* Make the button take the full height of the cell */
-        font-size: 14px !important; /* Adjust this value to your desired font size */
+        font-size: 20px !important; /* Adjust this value to your desired font size */
     }
 
     .control-buttons button {
