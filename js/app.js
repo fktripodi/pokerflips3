@@ -63,10 +63,19 @@ document.addEventListener('DOMContentLoaded', () => {
         renderGamesPlayed();
         renderPreviousPlayers();
         updateDeletePlayerDropdown();
+        updateAmounts();  // Call to update the amounts' styles
 
-        // Attach sound to action buttons
+        // Attach sound and color change to action buttons
         const actionButtons = document.querySelectorAll('.action-buttons button');
-        actionButtons.forEach(button => button.addEventListener('click', playSound));
+        actionButtons.forEach(button => {
+            button.addEventListener('click', playSound);
+            button.addEventListener('click', () => {
+                button.classList.add('clicked');
+                setTimeout(() => {
+                    button.classList.remove('clicked');
+                }, 2000);
+            });
+        });
     }
 
     function renderGamesPlayed() {
@@ -214,6 +223,23 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('gamesPlayed', JSON.stringify(gamesPlayed));
         renderPlayers();
     });
+
+    function updateAmounts() {
+        const amountCells = document.querySelectorAll('#players td:nth-child(4)');
+        amountCells.forEach(cell => {
+            const value = parseFloat(cell.textContent.replace('$', ''));
+            if (value < 0) {
+                cell.classList.add('negative-amount');
+                cell.classList.remove('positive-amount');
+            } else if (value > 0) {
+                cell.classList.add('positive-amount');
+                cell.classList.remove('negative-amount');
+            } else {
+                cell.classList.remove('positive-amount');
+                cell.classList.remove('negative-amount');
+            }
+        });
+    }
 
     renderPlayers();
     renderGamesPlayed();
