@@ -238,7 +238,7 @@ th {
     }
 
      .action-buttons {
-        gap: 2px; /* Adjust gap for media queries */
+        gap: 1px; /* Adjust gap for media queries */
 }
 
 
