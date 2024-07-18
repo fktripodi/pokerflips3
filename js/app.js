@@ -13,9 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmDeleteButton = document.getElementById('confirm-delete');
     const closeModal = document.querySelector('.close');
     const clickSound = document.getElementById('click-sound');
-    let gameValue = 50;
+    let gameValue = 50; // Default game value
 
     const chips = document.querySelectorAll('.chip');
+
+    // Set default selected chip
+    const defaultChip = document.querySelector('.chip-50');
+    defaultChip.classList.add('active');
+
     chips.forEach(chip => {
         chip.addEventListener('click', () => {
             gameValue = parseFloat(chip.dataset.value);
@@ -28,19 +33,18 @@ document.addEventListener('DOMContentLoaded', () => {
         clickSound.play();
     }
 
-    function renderPreviousPlayers() {
-        const currentPlayersNames = players.map(player => player.name);
-        previousPlayersDropdown.innerHTML = '<option value="add" disabled selected>Add Player</option><option value="add-new">Add New Player</option>';
-        previousPlayers.forEach(playerName => {
-            if (!currentPlayersNames.includes(playerName)) {
-                const option = document.createElement('option');
-                option.value = playerName;
-                option.textContent = playerName;
-                previousPlayersDropdown.appendChild(option);
+    // Function to truncate player names
+    function truncateNames() {
+        const playerNameCells = document.querySelectorAll('#players td:nth-child(2)');
+        playerNameCells.forEach(cell => {
+            const name = cell.textContent.trim();
+            if (name.length > 5) {
+                cell.textContent = name.substring(0, 5) + '..';
             }
         });
     }
 
+    // Call this function after rendering players
     function renderPlayers() {
         playersContainer.innerHTML = '';
         players.forEach((player, index) => {
@@ -60,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             playersContainer.appendChild(playerRow);
         });
+        truncateNames(); // Call this function to truncate names
         renderGamesPlayed();
         renderPreviousPlayers();
         updateDeletePlayerDropdown();
@@ -83,6 +88,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.updatePlayer = (index, action, multiplier = 1) => {
+        const activeChip = document.querySelector('.chip.active');
+        if (!activeChip) {
+            alert('Please select a chip value.');
+            return;
+        }
+
         const adjustedHandValue = gameValue * multiplier;
         if (action === 'win') {
             players[index].wins += multiplier;
