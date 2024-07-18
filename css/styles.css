@@ -219,6 +219,14 @@ th {
         font-size: 30px !important; /* Adjust this value to your desired font size */
         font-weight: bold !important; /* Make the text bold */
     }
+            .negative-amount {
+        color: red !important;
+        font-weight: bold !important;
+    }
+    .positive-amount {
+        color: green !important;
+        font-weight: bold !important;
+    }
 
             #players td:nth-child(4) {
         font-size: 30px !important; /* Adjust this value to your desired font size */
