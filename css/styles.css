@@ -101,6 +101,9 @@ th {
     display: flex;
     align-items: center;
     justify-content: center; /*ft - remove player button */
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box; /* Include padding and border in the width and height */
 }
 
 .past-players-section {
