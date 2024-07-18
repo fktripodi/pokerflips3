@@ -364,3 +364,10 @@ th {
     color: black;
 }
 
+/* Apply this to the player name cell */
+#players td:nth-child(2) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60px; /* Adjust based on your desired width */
+}
