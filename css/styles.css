@@ -21,12 +21,12 @@ body {
 }
 
 .chip-buttons button {
-    width: 60px;
-    height: 60px;
+    width: 50px;/*ft circle size*/
+    height: 50px;/*ft circle size*/
     border-radius: 50%;
     border: none;
     color: white;
-    font-size: 14px;
+    font-size: 13px; /*ft Chip font*/
     margin: 0 3px; /* Reduced margin to bring chips closer together */
     cursor: pointer;
 }
@@ -40,16 +40,16 @@ body {
 }
 
 .games-count {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     background-color: #007bff;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
-    margin-right: 20px;
+    font-size: 35px;
+    margin-right: 13px;
 }
 
 table {
@@ -74,18 +74,19 @@ th {
 .action-buttons {
     display: flex;
     justify-content: space-between;
-    gap: 2px;
+    gap: 15px; /*ft space between buttons */
 }
-
+/* -1 -2 -4 buttons */
 .action-buttons button {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     background-color: #007bff;
     color: white;
     border: none;
     cursor: pointer;
     padding: 0;
     margin: 0;
+    font-size: 25px; /*ft -1buttons */
 }
 
 .delete-button {
@@ -95,11 +96,14 @@ th {
     color: white;
     border: none;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 50px; /*ft - inside sqare box */
+    display: flex;
+    align-items: center;
+    justify-content: center; /*ft - remove player button */
 }
 
 .past-players-section {
-    margin-top: 250px;
+    margin-top: 25px; /*ft players history space */
     text-align: left;
 }
 
@@ -212,6 +216,17 @@ th {
         font-size: 14px;
     }
 
+  /* Increase font size for player names */
+#players td:nth-child(2) {
+    font-size: 18px; /* Adjust this value to your desired font size */
+  
+/* Target the $$ column font size */
+#players td:nth-child(4) {
+    font-size: 14px; /* Adjust this value to your desired font size */
+}
+
+}
+
     .action-buttons button {
         width: 25px;
         height: 25px;
@@ -224,7 +239,6 @@ th {
     }
 }
 
-/* Add this to your existing CSS */
 
 /* Target the WINS column */
 th:nth-child(1), td:nth-child(1) {
@@ -243,7 +257,7 @@ th:nth-child(3), td:nth-child(3) {
 
 /* Target the $$ column */
 th:nth-child(4), td:nth-child(4) {
-    width: 30px; /* Adjust this value to your desired width */
+    width: 20px; /* Adjust this value to your desired width */
 }
 
 /* Target the R column */
