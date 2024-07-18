@@ -209,6 +209,12 @@ th {
         font-size: 12px;
     }
 
+    @media screen and (max-width: 600px) {
+    #players td:nth-child(2) {
+        font-size: 20px !important; /* Adjust this value to your desired font size */
+        font-weight: bold !important; /* Make the text bold */
+    }
+
     .chip-buttons button {
         width: 55px;
         height: 55px;
