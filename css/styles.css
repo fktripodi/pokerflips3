@@ -216,11 +216,11 @@ th {
         height: 80px;
         font-size: 40px;
     } 
-
+/* blue button +- */
     .action-buttons button {
-        width: 100px !important; /* Override media query size */
-        height: 100px !important; /* Override media query size */
-        font-size: 40px !important; /* Override media query font size */
+        width: 60px !important; /* Override media query size */
+        height: 60px !important; /* Override media query size */
+        font-size: 30px !important; /* Override media query font size */
     }
 
     .control-buttons button {
