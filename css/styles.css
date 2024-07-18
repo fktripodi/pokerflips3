@@ -96,7 +96,7 @@ th {
     color: white;
     border: none;
     cursor: pointer;
-    font-size: 50px; /*ft - inside sqare box */
+    font-size: 20px; /*ft - inside sqare box */
     display: flex;
     align-items: center;
     justify-content: center; /*ft - remove player button */
