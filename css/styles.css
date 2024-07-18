@@ -65,6 +65,7 @@ th:nth-child(5), td:nth-child(5) {
         width: 55px;
         height: 55px;
         font-size: 12px;
+        argin-top: 15px; /* Adjust this value to move the $ chips down - was 20 */
     }
 
     .games-count {
