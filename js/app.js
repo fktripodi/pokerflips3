@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let players = JSON.parse(localStorage.getItem('players')) || [];
     let previousPlayers = JSON.parse(localStorage.getItem('previousPlayers')) || [];
     let gamesPlayed = JSON.parse(localStorage.getItem('gamesPlayed')) || 0;
+
     const restartGameButton = document.getElementById('restart-game');
     const deletePlayerButton = document.getElementById('delete-player');
     const playersContainer = document.getElementById('players');
@@ -35,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Function to truncate player names
     function truncateNames() {
         const playerNameCells = document.querySelectorAll('#players td:nth-child(2)');
         playerNameCells.forEach(cell => {
@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateDeletePlayerDropdown();
         updateAmounts();
 
-        // Attach sound and color change to action buttons
         const actionButtons = document.querySelectorAll('.action-buttons button');
         actionButtons.forEach(button => {
             button.addEventListener('click', playSound);
@@ -90,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderPreviousPlayers() {
         previousPlayersDropdown.innerHTML = '<option value="add" disabled selected>Add Player</option>';
+        previousPlayersDropdown.innerHTML += '<option value="add-new">Add New Player</option>';
         previousPlayers.forEach(player => {
             const option = document.createElement('option');
             option.value = player;
@@ -181,7 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
             deletePlayerDropdown.appendChild(option);
         });
 
-        // Adjust the size of the dropdown to fit all players
         deletePlayerDropdown.size = previousPlayers.length > 0 ? previousPlayers.length : 1;
     }
 
@@ -202,8 +201,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!player) {
                 player = { name: selectedPlayer, wins: 0, result: 0 };
                 players.push(player);
+                previousPlayers = previousPlayers.filter(p => p !== selectedPlayer);
                 localStorage.setItem('players', JSON.stringify(players));
+                localStorage.setItem('previousPlayers', JSON.stringify(previousPlayers));
                 renderPlayers();
+                renderPreviousPlayers();
             }
         }
         previousPlayersDropdown.value = "add";
