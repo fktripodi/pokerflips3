@@ -380,8 +380,8 @@ th {
     background-image: url('images/chip-25.png');
     background-size: cover;
     background-position: center;
-    width: 50px; /* Adjust to your image size */
-    height: 50px; /* Adjust to your image size */
+    width: 80px; /* Adjust to your image size was 50 */
+    height: 80px; /* Adjust to your image size */
     border: none;
     border-radius: 50%;
     cursor: pointer;
