@@ -114,9 +114,9 @@ th:nth-child(4), td:nth-child(4) {
 
 /* Ensure the R column remains the same width */
 th:nth-child(5), td:nth-child(5) {
-    width: 10px; /* Fixed width for the R column */
-    max-width: 10px; /* Ensure it doesn't stretch */
-    min-width: 10px; /* Ensure it doesn't shrink */
+    width: 15px; /* Fixed width for the R column */
+    max-width: 15px; /* Ensure it doesn't stretch */
+    min-width: 15px; /* Ensure it doesn't shrink */
 }
 
 /* Disable text selection */
