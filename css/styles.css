@@ -71,10 +71,11 @@ th {
     color: white;
 }
 
+/* -1 -2 -4 blue buttons */
 .action-buttons {
     display: flex;
     justify-content: space-between;
-    gap: 15px; /*ft space between buttons */
+    gap: 5px; /*ft space between blue buttons */
 }
 /* -1 -2 -4 blue buttons */
 .action-buttons button {
