@@ -10,6 +10,12 @@
         font-weight: bold !important; /* Make the text bold */
     }
 
+    /* Make the "R" column wider red square column */
+th:nth-child(5), td:nth-child(5) {
+    width: 50px !important; /* Adjust this value to your desired width */
+}
+
+    
     #players td:nth-child(3) { /* cells under "W" */
         font-size: 15px !important; /* Adjust this value to your desired font size */
         font-weight: bold !important; /* Make the text bold */
