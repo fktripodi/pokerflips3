@@ -217,9 +217,9 @@ th {
     } 
 
     .action-buttons button {
-        width: 40px !important; /* Override media query size */
-        height: 40px !important; /* Override media query size */
-        font-size: 25px !important; /* Override media query font size */
+        width: 100px !important; /* Override media query size */
+        height: 100px !important; /* Override media query size */
+        font-size: 40px !important; /* Override media query font size */
     }
 
     .control-buttons button {
