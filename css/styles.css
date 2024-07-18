@@ -30,7 +30,7 @@ th:nth-child(5), td:nth-child(5) {
         max-width: 600px !important; /* Set maximum width */
         width: 100% !important; /* Ensure buttons take full available width */
         box-sizing: border-box !important; /* Include padding and border in width */
-         height: 30px; /* Adjust this value to your desired height */
+         height: 50px; /* Adjust this value to your desired height */
     }
 
    #previous-players {
