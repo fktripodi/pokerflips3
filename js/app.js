@@ -30,7 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function playSound() {
-        clickSound.play();
+        clickSound.play().catch(error => {
+            console.error('Failed to play sound:', error);
+        });
     }
 
     // Function to truncate player names
@@ -44,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Call this function after rendering players
     function renderPlayers() {
         playersContainer.innerHTML = '';
         players.forEach((player, index) => {
@@ -64,11 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             playersContainer.appendChild(playerRow);
         });
-        truncateNames(); // Call this function to truncate names
+        truncateNames();
         renderGamesPlayed();
         renderPreviousPlayers();
         updateDeletePlayerDropdown();
-        updateAmounts();  // Call to update the amounts' styles
+        updateAmounts();
 
         // Attach sound and color change to action buttons
         const actionButtons = document.querySelectorAll('.action-buttons button');
@@ -85,6 +86,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderGamesPlayed() {
         gamesPlayedDisplay.textContent = gamesPlayed;
+    }
+
+    function renderPreviousPlayers() {
+        previousPlayersDropdown.innerHTML = '<option value="add" disabled selected>Add Player</option>';
+        previousPlayers.forEach(player => {
+            const option = document.createElement('option');
+            option.value = player;
+            option.textContent = player;
+            previousPlayersDropdown.appendChild(option);
+        });
     }
 
     window.updatePlayer = (index, action, multiplier = 1) => {
