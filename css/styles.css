@@ -214,11 +214,16 @@ th {
         font-size: 25px !important; /* Adjust this value to your desired font size */
         font-weight: bold !important; /* Make the text bold */
     }
-        
+    
+    
     #players td:nth-child(3) {
         font-size: 30px !important; /* Adjust this value to your desired font size */
         font-weight: bold !important; /* Make the text bold */
     }
+            #players td:nth-child(4) {
+        font-size: 30px !important; /* Adjust this value to your desired font size */
+        font-weight: bold !important; /* Make the text bold */  
+     }
             .negative-amount {
         color: red !important;
         font-weight: bold !important;
@@ -226,11 +231,7 @@ th {
     .positive-amount {
         color: green !important;
         font-weight: bold !important;
-    }
 
-            #players td:nth-child(4) {
-        font-size: 30px !important; /* Adjust this value to your desired font size */
-        font-weight: bold !important; /* Make the text bold */
     }
         
     .chip-buttons button {
@@ -244,6 +245,7 @@ th {
         height: 80px;
         font-size: 40px;
     } 
+                
 /* blue button +- */
     .action-buttons button {
         width: 50px !important; /* Override media query size */
