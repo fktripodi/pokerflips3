@@ -369,5 +369,5 @@ th {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 60px; /* Adjust based on your desired width */
+    max-width: 80px; /* Adjust based on your desired width */
 }
