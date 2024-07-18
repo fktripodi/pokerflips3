@@ -19,7 +19,7 @@ th:nth-child(5), td:nth-child(5) {
     #delete-player, #previous-players, #restart-game {
         font-size: 1.2em !important; /* Increase font size */
         padding: 12px 24px !important; /* Increase padding */
-        background-color: #ff0000 !important; /* Change background color to red */
+        background-color: #FFA500 !important; /* Change background color to red */
         color: white !important; /* Ensure text is white */
         border: none !important; /* Remove border */
         border-radius: 5px !important; /* Add border radius */
