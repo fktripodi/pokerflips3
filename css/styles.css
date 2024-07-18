@@ -377,7 +377,7 @@ th {
 }
 
 .chip-25 {
-       background-image: url('images/chip-25.png');
+    background-image: url('images/chip-25.png');
     background-size: cover;
     background-position: center;
     width: 50px; /* Adjust to your image size */
