@@ -211,10 +211,10 @@ th {
     }
 
     .games-count {
-        width: 55px;
-        height: 55px;
-        font-size: 14px;
-    }
+        width: 80px;
+        height: 80px;
+        font-size: 20px; 
+    } 
 
   /* Increase font size for player names */
 #players td:nth-child(2) {
@@ -222,7 +222,7 @@ th {
   
 /* Target the $$ column font size */
 #players td:nth-child(4) {
-    font-size: 14px; /* Adjust this value to your desired font size */
+    font-size: 20px !important; /* Adjust this value to your desired font size */
 }
 
 }
