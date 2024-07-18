@@ -217,11 +217,11 @@ th {
     
     
     #players td:nth-child(3) {
-        font-size: 30px !important; /* Adjust this value to your desired font size */
+        font-size: 15px !important; /* Adjust this value to your desired font size */
         font-weight: bold !important; /* Make the text bold */
     }
             #players td:nth-child(4) {
-        font-size: 30px !important; /* Adjust this value to your desired font size */
+        font-size: 25px !important; /* Adjust this value to your desired font size */
         font-weight: bold !important; /* Make the text bold */  
      }
             .negative-amount {
