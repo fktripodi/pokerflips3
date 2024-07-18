@@ -76,10 +76,10 @@ th {
     justify-content: space-between;
     gap: 15px; /*ft space between buttons */
 }
-/* -1 -2 -4 buttons */
+/* -1 -2 -4 blue buttons */
 .action-buttons button {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
     background-color: #007bff;
     color: white;
     border: none;
@@ -89,9 +89,10 @@ th {
     font-size: 25px; /*ft -1buttons */
 }
 
+/*ft -1 red sqaure*/
 .delete-button {
-    width: 10px;
-    height: 10px;
+    width: 40px;
+    height: 40px;
     background-color: #dc3545;
     color: white;
     border: none;
