@@ -25,7 +25,7 @@ th:nth-child(5), td:nth-child(5) {
         color: white !important; /* Ensure text is white */
         border: none !important; /* Remove border */
         border-radius: 5px !important; /* Add border radius */
-        margin: 5px !important; /* Add margin for spacing */
+        margin: 2px !important; /* Add margin for spacing */
         cursor: pointer !important; /* Ensure pointer cursor */
         max-width: 600px !important; /* Set maximum width */
         width: 100% !important; /* Ensure buttons take full available width */
