@@ -273,7 +273,9 @@ th:nth-child(4), td:nth-child(4) {
     width: 20px; /* Adjust this value to your desired width */
 }
 
-/* Target the R column */
+/* Ensure the R column remains the same width */
 th:nth-child(5), td:nth-child(5) {
-    width: 5px; /* Adjust this value to your desired width */
+    width: 30px; /* Fixed width for the R column */
+    max-width: 30px; /* Ensure it doesn't stretch */
+    min-width: 30px; /* Ensure it doesn't shrink */
 }
