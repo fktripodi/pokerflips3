@@ -19,7 +19,7 @@ th:nth-child(5), td:nth-child(5) {
        /* Make "Delete Player," "Add Player," and "New Game" buttons larger but with a max width */
     #delete-player, #previous-players, #restart-game {
         font-size: 1.2em !important; /* Increase font size */
-        padding: 12px 24px !important; /* Increase padding */
+        padding: 2px 10px !important; /* Increase padding was 12px 24px*/
         background-color: #FFA500 !important; /* Change background color to red */
         font-weight: bold;
         color: white !important; /* Ensure text is white */
