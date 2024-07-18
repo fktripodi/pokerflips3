@@ -375,3 +375,15 @@ th {
     text-overflow: ellipsis;
     max-width: 85px; /* Adjust based on your desired width */
 }
+
+.chip-25 {
+    background-image: url('images/chip-25.png');
+    background-size: cover;
+    background-position: center;
+    width: 50px; /* Adjust to your image size */
+    height: 50px; /* Adjust to your image size */
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+
+    }
