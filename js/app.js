@@ -1,32 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let players = JSON.parse(localStorage.getItem('players')) || [];
-    let previousPlayers = JSON.parse(localStorage.getItem('previousPlayers')) || [];
-    let gamesPlayed = JSON.parse(localStorage.getItem('gamesPlayed')) || 0;
-
-    const restartGameButton = document.getElementById('restart-game');
-    const deletePlayerButton = document.getElementById('delete-player');
-    const playersContainer = document.getElementById('players');
-    const gamesPlayedDisplay = document.getElementById('games-played');
-    const previousPlayersDropdown = document.getElementById('previous-players');
-    const pastPlayersContainer = document.getElementById('past-players');
-    const deletePlayerModal = document.getElementById('delete-player-modal');
-    const deletePlayerDropdown = document.getElementById('delete-player-dropdown');
-    const confirmDeleteButton = document.getElementById('confirm-delete');
-    const closeModal = document.querySelector('.close');
-    const clickSound = document.getElementById('click-sound');
-    let gameValue = 50; // Default game value
-
+    document.addEventListener('DOMContentLoaded', () => {
     const chips = document.querySelectorAll('.chip');
+    const customValueInput = document.getElementById('custom-value');
+    let gameValue = 50;
 
-    // Set default selected chip
     const defaultChip = document.querySelector('.chip-50');
     defaultChip.classList.add('active');
 
     chips.forEach(chip => {
         chip.addEventListener('click', () => {
             gameValue = parseFloat(chip.dataset.value);
+            customValueInput.value = gameValue;
             chips.forEach(c => c.classList.remove('active'));
             chip.classList.add('active');
+        });
+    });
+
+    customValueInput.addEventListener('input', () => {
+        gameValue = parseFloat(customValueInput.value);
+        chips.forEach(c => c.classList.remove('active'));
+    });
+});
         });
     });
 
