@@ -61,17 +61,7 @@ th:nth-child(5), td:nth-child(5) {
         font-weight: bold !important;
     }
 
-    .chip-buttons button {
-        width: 55px;
-        height: 55px;
-        font-size: 12px;
-        argin-top: 15px; /* Adjust this value to move the $ chips down - was 20 */
-    }
-
-    .games-count {
-        width: 80px;
-        height: 80px;
-        font-size: 40px;
+   .chip-container
     }
 
     /* blue button +- */
